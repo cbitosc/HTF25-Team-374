@@ -66,7 +66,7 @@ const HomePage: React.FC = () => {
       
       {/* Recently Lost Items Section */}
       <div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Recently Lost</h2>
+        <h2 className="text-3xl font-bold text-emerald-200 mb-6 border-l-4 border-brand-700 pl-4">Recently Lost</h2>
         {loading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <SkeletonCard /><SkeletonCard /><SkeletonCard />
@@ -84,7 +84,7 @@ const HomePage: React.FC = () => {
 
       {/* Recently Found Items Section */}
       <div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Recently Found</h2>
+  <h2 className="text-3xl font-bold text-emerald-200 mb-6 border-l-4 border-brand-700 pl-4">Recently Found</h2>
         {loading ? (
              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <SkeletonCard /><SkeletonCard /><SkeletonCard />
