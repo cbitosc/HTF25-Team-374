@@ -9,10 +9,13 @@ import { MOCK_ITEMS, MOCK_MESSAGES } from '../data/mockData';
 interface DataContextType {
   items: Item[];
   messages: Message[];
+  verifications: import('../types').Verification[];
   loading: boolean;
   addItem: (item: Omit<Item, 'id'>) => Promise<void>;
   updateItemStatus: (itemId: number, status: ItemStatus) => Promise<void>;
   sendMessage: (message: Omit<Message, 'id' | 'timestamp'>) => Promise<void>;
+  requestVerification: (data: { itemId: number; requesterId: number; verifierId: number }) => Promise<string>;
+  verifyRequest: (verificationId: number, code: string) => Promise<boolean>;
   getConversations: (userId: number) => any[];
   getItemById: (itemId: number) => Item | undefined;
   setFlashMessage: (message: string | null) => void;
@@ -24,6 +27,7 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<Item[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [verifications, setVerifications] = useState<import('../types').Verification[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [flashMessage, setFlashMessageState] = useState<string | null>(null);
 
@@ -34,6 +38,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       await new Promise(resolve => setTimeout(resolve, 800)); // Simulate network latency
       setItems(MOCK_ITEMS);
       setMessages(MOCK_MESSAGES);
+      setVerifications([]);
       setLoading(false);
     };
     fetchInitialData();
@@ -72,6 +77,39 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setMessages(prevMessages => [...prevMessages, newMessage]);
   };
 
+  const requestVerification = async (data: { itemId: number; requesterId: number; verifierId: number }) => {
+    await new Promise(resolve => setTimeout(resolve, 200));
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    const v: import('../types').Verification = {
+      id: Date.now(),
+      itemId: data.itemId,
+      requesterId: data.requesterId,
+      verifierId: data.verifierId,
+      code,
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+    };
+    setVerifications(prev => [...prev, v]);
+    return code;
+  };
+
+  const verifyRequest = async (verificationId: number, code: string) => {
+    await new Promise(resolve => setTimeout(resolve, 200));
+    let success = false;
+    setVerifications(prev => prev.map(v => {
+      if (v.id === verificationId) {
+        if (v.code === code) {
+          success = true;
+          return { ...v, status: 'verified' };
+        }
+        success = false;
+        return { ...v, status: 'failed' };
+      }
+      return v;
+    }));
+    return success;
+  };
+
   const getItemById = useCallback((itemId: number) => {
     return items.find(item => item.id === itemId);
   }, [items]);
@@ -97,7 +135,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <DataContext.Provider value={{ items, messages, loading, addItem, updateItemStatus, sendMessage, getItemById, getConversations, flashMessage, setFlashMessage }}>
+    <DataContext.Provider value={{ items, messages, verifications, loading, addItem, updateItemStatus, sendMessage, requestVerification, verifyRequest, getItemById, getConversations, flashMessage, setFlashMessage }}>
       {children}
     </DataContext.Provider>
   );

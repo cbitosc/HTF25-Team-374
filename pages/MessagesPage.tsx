@@ -8,7 +8,7 @@ import { MOCK_USERS } from '../data/mockData';
 // This page acts as the user's inbox, showing a summary of all their conversations.
 const MessagesPage: React.FC = () => {
   const { currentUser } = useAuth();
-  const { getConversations } = useData();
+  const { getConversations, verifications, verifyRequest, setFlashMessage } = useData();
   const navigate = useNavigate();
 
   if (!currentUser) {
@@ -42,6 +42,28 @@ const MessagesPage: React.FC = () => {
                   <p className="mt-1 text-sm text-gray-600 truncate">
                     <span className="font-semibold">{lastMessage.senderId === currentUser.id ? 'You' : getUserName(otherUser)}:</span> {lastMessage.content}
                   </p>
+                  {/* Verification action for item owner */}
+                  {currentUser && item && item.userId === currentUser.id && verifications && verifications.find && (() => {
+                    const pending = verifications.find((v: any) => v.itemId === item.id && v.verifierId === currentUser.id && v.requesterId === otherUser && v.status === 'pending');
+                    if (pending) {
+                      return (
+                        <div className="mt-2">
+                          <button onClick={async (e) => {
+                              e.stopPropagation();
+                              const code = window.prompt('Enter verification code provided by claimant');
+                              if (!code) return;
+                              const ok = await verifyRequest(pending.id, code);
+                              if (ok) {
+                                setFlashMessage('Verification successful — claim marked verified.');
+                              } else {
+                                setFlashMessage('Verification failed — code did not match.');
+                              }
+                            }} className="text-sm bg-emerald-600 text-white px-3 py-1 rounded-md">Verify claim</button>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })()}
                 </div>
               </div>
             </li>

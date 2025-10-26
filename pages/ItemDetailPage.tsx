@@ -12,6 +12,7 @@ const ItemDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const { getItemById, messages, sendMessage, loading } = useData();
   const { currentUser } = useAuth();
+  const { requestVerification, verifications, setFlashMessage } = useData();
   
   const [item, setItem] = useState<Item | null>(null);
   const [itemOwner, setItemOwner] = useState<User | null>(null);
@@ -113,6 +114,31 @@ const ItemDetailPage: React.FC = () => {
                 </div>
               ))}
             </div>
+                        {/* Verification area for claimant */}
+                        {currentUser && itemOwner && (
+                          <div className="mb-3">
+                            {verifications && verifications.find && (() => {
+                              const existing = verifications.find((v: any) => v.itemId === item.id && v.requesterId === currentUser.id && v.verifierId === itemOwner.id);
+                              if (existing) {
+                                return (
+                                  <div className="mb-2 text-sm text-gray-200">
+                                    Verification status: <span className={existing.status === 'verified' ? 'text-emerald-300' : existing.status === 'pending' ? 'text-yellow-300' : 'text-rose-300'}>{existing.status}</span>
+                                  </div>
+                                );
+                              }
+                              return null;
+                            })()}
+                            <div className="flex space-x-2">
+                              <button onClick={async () => {
+                                if (!currentUser) return;
+                                const code = await requestVerification({ itemId: item.id, requesterId: currentUser.id, verifierId: itemOwner.id });
+                                setFlashMessage(`Verification requested. Share this code with the owner: ${code}`);
+                              }} className="bg-brand-700 text-white px-3 py-2 rounded-md hover:bg-brand-600">
+                                Request Verification
+                              </button>
+                            </div>
+                          </div>
+                        )}
             <form onSubmit={handleSendMessage}>
               <div className="flex">
                 <input

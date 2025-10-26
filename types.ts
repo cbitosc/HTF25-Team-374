@@ -38,6 +38,16 @@ export interface Message {
   timestamp: string;
 }
 
+export interface Verification {
+  id: number;
+  itemId: number;
+  requesterId: number; // person claiming the item
+  verifierId: number; // item owner / finder
+  code: string; // one-time code
+  status: 'pending' | 'verified' | 'failed';
+  createdAt: string;
+}
+
 export interface Conversation {
   itemId: number;
   otherUserId: number;
