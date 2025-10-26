@@ -17,15 +17,15 @@ const Header: React.FC = () => {
 
   // Common link styles for NavLink
   const linkStyles = "px-3 py-2 rounded-md text-sm font-medium transition-colors";
-  const activeLinkStyles = "bg-gray-900 text-white";
-  const inactiveLinkStyles = "text-gray-500 hover:bg-gray-700 hover:text-white";
+  const activeLinkStyles = "bg-brand-800 text-emerald-100";
+  const inactiveLinkStyles = "text-gray-300 hover:bg-gray-800 hover:text-emerald-200";
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+  <header className="bg-gray-900 shadow-md sticky top-0 z-50">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <NavLink to="/" className="text-2xl font-bold text-gray-800">
+            <NavLink to="/" className="text-2xl font-bold text-emerald-300">
               FoundIt!
             </NavLink>
             <div className="hidden md:block">
@@ -46,8 +46,8 @@ const Header: React.FC = () => {
             {currentUser ? (
               <>
                 <NavLink to="/messages" className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : inactiveLinkStyles}`}>Messages</NavLink>
-                <span className="text-gray-500 text-sm mx-3 hidden sm:inline">Hi, {currentUser.name}</span>
-                <button onClick={handleLogout} className="ml-4 bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-red-600 transition">
+                <span className="text-gray-300 text-sm mx-3 hidden sm:inline">Hi, {currentUser.name}</span>
+                <button onClick={handleLogout} className="ml-4 bg-rose-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-rose-700 transition">
                   Logout
                 </button>
               </>
@@ -59,7 +59,7 @@ const Header: React.FC = () => {
                 </button>
               </>
             ) : (
-              <NavLink to="/login" className="bg-blue-500 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition">
+              <NavLink to="/login" className="bg-brand-700 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-brand-600 transition">
                 Login / Register
               </NavLink>
             )}

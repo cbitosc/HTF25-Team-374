@@ -6,6 +6,22 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Digital Lost & Found</title>
+    <script>
+      // Tailwind CDN config: extend theme with a dark green brand palette
+      window.tailwind = window.tailwind || {};
+      window.tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-900': '#052f24',
+              'brand-800': '#0b3d2e',
+              'brand-700': '#165e43',
+              'brand-600': '#1f7a53'
+            }
+          }
+        }
+      };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
   <script type="importmap">
 {
@@ -19,7 +35,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-900 text-gray-100">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

@@ -71,16 +71,16 @@ const ItemDetailPage: React.FC = () => {
   const isMyItem = currentUser?.id === item.userId;
 
   return (
-    <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <div className="bg-gray-800 p-6 md:p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
         <div className="grid md:grid-cols-2 gap-8">
             {/* Item Info Column */}
             <div>
                 <img src={item.image} alt={item.title} className="w-full h-80 object-cover rounded-lg mb-4" />
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{item.title}</h1>
-                <span className={`capitalize px-3 py-1 text-sm font-semibold rounded-full ${item.status === 'lost' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                <h1 className="text-3xl font-bold text-gray-100 mb-2">{item.title}</h1>
+                <span className={`capitalize px-3 py-1 text-sm font-semibold rounded-full ${item.status === 'lost' ? 'bg-rose-700 text-rose-100' : 'bg-emerald-800 text-emerald-100'}`}>
                     {item.status}
                 </span>
-                <div className="mt-6 space-y-4 text-gray-700">
+                <div className="mt-6 space-y-4 text-gray-300">
                     <p><strong className="font-semibold">Description:</strong> {item.description}</p>
                     <p><strong className="font-semibold">Location:</strong> {item.location}</p>
                     <p><strong className="font-semibold">Date:</strong> {new Date(item.datetime).toLocaleString()}</p>
@@ -93,43 +93,43 @@ const ItemDetailPage: React.FC = () => {
                 <h2 className="text-2xl font-semibold mb-4 border-b pb-2">
                     {isMyItem ? 'Messages about your item' : `Contact ${itemOwner.name}`}
                 </h2>
-                {!currentUser ? (
-                    <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
-                        <p>You must be <a href="#/login" className="font-bold underline">logged in</a> to send a message.</p>
-                    </div>
-                ) : isMyItem ? (
-                     <div className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded-md">
-                        <p>This is your item. You can view messages from other users here.</p>
-                    </div>
-                ) : (
-                    <div className="h-96 bg-gray-50 p-4 rounded-lg flex flex-col">
-                        <div className="flex-grow overflow-y-auto mb-4 space-y-4">
-                            {conversation.map(msg => (
-                                <div key={msg.id} className={`flex ${msg.senderId === currentUser.id ? 'justify-end' : 'justify-start'}`}>
-                                    <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${msg.senderId === currentUser.id ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>
-                                        <p>{msg.content}</p>
-                                        <p className="text-xs opacity-75 mt-1">{new Date(msg.timestamp).toLocaleTimeString()}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <form onSubmit={handleSendMessage}>
-                            <div className="flex">
-                                <input
-                                    type="text"
-                                    value={newMessage}
-                                    onChange={(e) => setNewMessage(e.target.value)}
-                                    placeholder="Type your message..."
-                                    className="flex-grow border border-gray-300 rounded-l-lg p-2 focus:ring-blue-500 focus:border-blue-500"
-                                    disabled={isSending}
-                                />
-                                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 disabled:bg-blue-300" disabled={isSending}>
-                                    {isSending ? '...' : 'Send'}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                )}
+        {!currentUser ? (
+          <div className="bg-yellow-200 border-l-4 border-yellow-500 text-yellow-900 p-4 rounded-md">
+            <p>You must be <a href="#/login" className="font-bold underline">logged in</a> to send a message.</p>
+          </div>
+        ) : isMyItem ? (
+           <div className="bg-gray-700 border-l-4 border-gray-600 text-gray-200 p-4 rounded-md">
+            <p>This is your item. You can view messages from other users here.</p>
+          </div>
+        ) : (
+          <div className="h-96 bg-gray-700 p-4 rounded-lg flex flex-col">
+            <div className="flex-grow overflow-y-auto mb-4 space-y-4">
+              {conversation.map(msg => (
+                <div key={msg.id} className={`flex ${msg.senderId === currentUser.id ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${msg.senderId === currentUser.id ? 'bg-emerald-600 text-white' : 'bg-gray-600 text-gray-100'}`}>
+                    <p>{msg.content}</p>
+                    <p className="text-xs opacity-75 mt-1">{new Date(msg.timestamp).toLocaleTimeString()}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <form onSubmit={handleSendMessage}>
+              <div className="flex">
+                <input
+                  type="text"
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  placeholder="Type your message..."
+                  className="flex-grow border border-gray-600 rounded-l-lg p-2 bg-gray-800 text-gray-100 focus:ring-emerald-500 focus:border-emerald-500"
+                  disabled={isSending}
+                />
+                <button type="submit" className="bg-emerald-600 text-white px-4 py-2 rounded-r-lg hover:bg-emerald-700 disabled:bg-emerald-300" disabled={isSending}>
+                  {isSending ? '...' : 'Send'}
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
             </div>
         </div>
     </div>

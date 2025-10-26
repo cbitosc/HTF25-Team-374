@@ -15,8 +15,8 @@ const Layout: React.FC = () => {
       <main className="flex-grow container mx-auto p-4 md:p-6">
         <Outlet />
       </main>
-      <footer className="bg-white shadow-inner py-4 mt-8">
-        <div className="container mx-auto text-center text-gray-500 text-sm">
+      <footer className="bg-gray-900 shadow-inner py-4 mt-8">
+        <div className="container mx-auto text-center text-gray-400 text-sm">
           &copy; 2024 Digital Lost & Found Platform. All rights reserved.
         </div>
       </footer>
