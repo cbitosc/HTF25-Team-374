@@ -63,7 +63,7 @@ const ItemsListPage: React.FC<ItemsListPageProps> = ({ type }) => {
             placeholder="Search by keyword, description, or location..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-3 pl-10 border border-gray-300 rounded-lg bg-gray-100 text-black focus:ring-emerald-500 focus:border-emerald-500"
           />
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>

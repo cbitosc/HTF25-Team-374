@@ -71,22 +71,22 @@ const ReportItemPage: React.FC = () => {
         
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700">Item Name</label>
-          <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+          <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-black placeholder-gray-500 shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500" />
         </div>
         
         <div>
           <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-          <textarea id="description" value={description} onChange={e => setDescription(e.target.value)} required rows={4} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+          <textarea id="description" value={description} onChange={e => setDescription(e.target.value)} required rows={4} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-black placeholder-gray-500 shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"></textarea>
         </div>
         
         <div>
           <label htmlFor="location" className="block text-sm font-medium text-gray-700">{status === 'lost' ? 'Last Seen' : 'Location Found'}</label>
-          <input type="text" id="location" value={location} onChange={e => setLocation(e.target.value)} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+          <input type="text" id="location" value={location} onChange={e => setLocation(e.target.value)} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-black placeholder-gray-500 shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500" />
         </div>
         
         <div>
           <label htmlFor="datetime" className="block text-sm font-medium text-gray-700">Date and Time</label>
-          <input type="datetime-local" id="datetime" value={datetime} onChange={e => setDatetime(e.target.value)} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+          <input type="datetime-local" id="datetime" value={datetime} onChange={e => setDatetime(e.target.value)} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-black placeholder-gray-500 shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500" />
         </div>
 
         <div>
@@ -95,7 +95,7 @@ const ReportItemPage: React.FC = () => {
                 <span className="h-24 w-24 rounded-md overflow-hidden bg-gray-100">
                     {imagePreview ? <img src={imagePreview} alt="Preview" className="h-full w-full object-cover" /> : <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M24 20.993V24H0v-2.997A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" /></svg>}
                 </span>
-                <input type="file" onChange={handleImageChange} accept="image/*" className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+                <input type="file" onChange={handleImageChange} accept="image/*" className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
             </div>
         </div>
 

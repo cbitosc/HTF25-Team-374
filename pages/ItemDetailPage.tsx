@@ -120,7 +120,7 @@ const ItemDetailPage: React.FC = () => {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-grow border border-gray-600 rounded-l-lg p-2 bg-gray-800 text-gray-100 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="flex-grow border border-gray-300 rounded-l-lg p-2 bg-gray-100 text-black focus:ring-emerald-500 focus:border-emerald-500"
                   disabled={isSending}
                 />
                 <button type="submit" className="bg-emerald-600 text-white px-4 py-2 rounded-r-lg hover:bg-emerald-700 disabled:bg-emerald-300" disabled={isSending}>
