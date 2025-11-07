@@ -66,3 +66,4 @@ In this Readme, you will find a guide on how to fork this Repository, add files 
 </details>
 
 ## Thanks for participating!
+>>>>>>> 55758212a26e1d71dc7e76741a85be620c5734e0
